@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Chatbot</title>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chatbox { width: 60%; margin: auto; padding: 10px; border: 1px solid #ccc; }
+        #userInput { width: 80%; padding: 10px; }
+        #sendBtn, #voiceBtn { padding: 10px; cursor: pointer; }
+        #responseText { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h1>Chatbot with Voice Support</h1>
+    <div id="chatbox">
+        <input type="text" id="userInput" placeholder="Type a message...">
+        <button id="sendBtn">Send</button>
+        <button id="voiceBtn">🎤 Speak</button>
+    </div>
+    <p id="responseText"></p>
+    <audio id="audioResponse" controls></audio>
+</body>
+</html>
