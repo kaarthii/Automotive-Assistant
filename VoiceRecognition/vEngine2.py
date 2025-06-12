@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify,render_template
 import os
 import ollama
-from speechToText import recognize_speech,process
+from speechToText import recognize_speech,record_audio
 from textToSpeech import speak
 
 
@@ -55,7 +55,7 @@ def voice():
     listening = True  
 
     while listening:  
-        user_question = process()
+        user_question = recognize_speech()
         if not user_question:
             print("No valid speech detected.")
             return jsonify({"error": "Could not recognize speech"}), 400
