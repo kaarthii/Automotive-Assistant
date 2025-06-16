@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify,render_template
 import os
 import ollama
-from speechToText import recognize_speech,process
+from speechToText import recognize_speech,record_audio
 from textToSpeech import speak
 
 
@@ -34,7 +34,7 @@ Respond only with the translated question and your final answer.
 def detect_intent(user_question):
     user_question=user_question.lower()
 
-    if "search" in user_question or "google" in user_question:
+    if "search" in user_question or "google" in user_question or "find" in user_question:
         return "search_web"
     elif "play" in user_question or "youtube" in user_question:
         return "play_youtube"
@@ -44,24 +44,40 @@ def detect_intent(user_question):
         return "exit"
     else:
         return "general_question"
+
+def refine_query(intent,user_question):
+    user_question=user_question.lower()
+    keywords={
+        "search_web":["search","google","find"],
+        "play_youtube":["play","youtube"],
+        "open_website":["open","website"]
+    }
+
+    for keyword in keywords.get(intent,[]):
+        user_question=user_question.replace(keyword,"")
+    return user_question.strip()
     
 def perform_action(intent,user_question):
     if intent=="search_web":
         from intent import search_google
+        refined_query=refine_query(intent,user_question)
         speak("Searching on google!")
-        search_google(user_question)
+        search_google(refined_query)
 
     elif intent=="play_youtube":
         from intent import play_youtube
+        refined_query=refine_query(intent,user_question)
         speak("Playing on youtube!")
-        play_youtube(user_question)
+        play_youtube(refined_query)
 
-    elif intent=="open website":
+    elif intent=="open_website":
         from intent import open_website
+        refined_query=refine_query(intent,user_question)
         speak("Openning!")
-        open_website(user_question)
+        open_website(refined_query)
+        return False
 
-    elif intent=="general question":
+    elif intent=="general_question":
         speak("Hmm..Thinking...")
         answer=get_answer(user_question)
         speak(f"{answer}")
@@ -94,7 +110,7 @@ def voice():
     listening = True  
 
     while listening:  
-        user_question = process()
+        user_question = recognize_speech()
         if not user_question:
             print("No valid speech detected.")
             return jsonify({"error": "Could not recognize speech"}), 400
