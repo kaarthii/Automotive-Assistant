@@ -78,3 +78,23 @@ def open_app(app_keyword,text=None):
     else:
         print(f"Could not locate app matching: {app_keyword}")
 
+def play_in_spotify(track_name):
+    path=find_exe_path("spotify")
+    if path:
+        subprocess.Popen(path)
+        time.sleep(3)
+        matches=[win for win in gw.getAllTitles() if "spotify" in win.lower()]
+        if matches:
+            try:
+                window=gw.getWindowsWithTitle(matches[0])[0]
+                window.activate()
+                time.sleep(1)
+                if track_name:
+                    pyautogui.hotkey('ctrl','l')
+                    pyautogui.write(track_name)
+                    pyautogui.press('enter')
+            except Exception as e:
+                print(f"couldn't activate spotify window: {e}")
+    else:
+        print("Spotify not found")
+
