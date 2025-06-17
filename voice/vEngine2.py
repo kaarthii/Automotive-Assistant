@@ -7,7 +7,10 @@ import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from intent import search_google,play_youtube,open_website,open_app
+from intent import play_in_spotify 
 
+pending_query = None
+pending_action = None
 
 app=Flask(__name__,static_folder='static')
 df=pd.read_csv("data.csv")
@@ -52,10 +55,12 @@ def is_similar(user_input,threshold=0.55):
 def detect_intent(user_question):
     user_question=user_question.lower()
 
+    if pending_action=="play" and ("spotify" in user_question or "youtube" in user_question):
+        return "resolve_play"
     if "search" in user_question or "google" in user_question or "find" in user_question:
         return "search_web"
-    elif "play" in user_question or "youtube" in user_question:
-        return "play_youtube"
+    elif "play" in user_question :
+        return "play_media"
     elif "open" in user_question and "website" in user_question:
         return "open_website"
     elif "open" in user_question and not(".com" in user_question or "website" in user_question):
@@ -65,11 +70,13 @@ def detect_intent(user_question):
     else:
         return "general_question"
 
+    
+
 def refine_query(intent,user_question):
     user_question=user_question.lower()
     keywords={
         "search_web":["search","google","find"],
-        "play_youtube":["play","youtube"],
+        "play_media":["play"],
         "open_website":["open","website"]
     }
 
@@ -78,15 +85,26 @@ def refine_query(intent,user_question):
     return user_question.strip()
     
 def perform_action(intent,user_question):
+    global pending_query, pending_action
     if intent=="search_web":
         refined_query=refine_query(intent,user_question)
         speak("Searching on google!")
         search_google(refined_query)
 
-    elif intent=="play_youtube":
+    elif intent=="play_media":
+        
         refined_query=refine_query(intent,user_question)
-        speak("Playing on youtube!")
-        play_youtube(refined_query)
+        if "on youtube" in user_question or "youtube" in user_question:
+            speak("playing on youtube")
+            play_youtube(refined_query.replace("on youtube","").strip())
+        elif "on spotify" in user_question or "spotify" in user_question:
+            speak("playing on spotify")
+            play_in_spotify(refined_query.replace("on spotify","").strip())
+        else:
+            pending_query=refined_query
+            pending_action="play"
+            speak("would you like me to play on spotify or youtube?")
+
 
     elif intent=="open_website":
         refined_query=refine_query(intent,user_question)
@@ -115,7 +133,16 @@ def perform_action(intent,user_question):
             open_app(app,text)
         else:
             speak("I couldn't identify which app to open")
-
+    
+    elif intent=="resolve_play":
+      
+        if "spotify" in user_question:
+            speak("playing on spotify")
+            play_in_spotify(pending_query)
+        elif "youtube" in user_question:
+            play_youtube(pending_query)
+        pending_query=None
+        pending_action=None
 
     elif intent=="general_question":
         speak("Hmm..Thinking...")
