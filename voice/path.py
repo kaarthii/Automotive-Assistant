@@ -12,7 +12,7 @@ def find_exe_path(app_keyword):
             os.environ.get("LOCALAPPDATA","")
         ]
         for base in search_dirs:
-            for root, _, files in os.walk(base):
+            for root, dirs, files in os.walk(base):
                 for file in files:
                     if app_keyword.lower() in file.lower() and file.endswith(".exe"):
                         return os.path.join(root,file)
