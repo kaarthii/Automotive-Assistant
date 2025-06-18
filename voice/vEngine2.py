@@ -8,6 +8,7 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from intent import search_google,play_youtube,open_website,open_app
 from intent import play_in_spotify 
+import time
 
 pending_query = None
 pending_action = None
@@ -57,6 +58,9 @@ def detect_intent(user_question):
 
     if pending_action=="play" and ("spotify" in user_question or "youtube" in user_question):
         return "resolve_play"
+    if "open" in user_question and "play" in user_question:
+        return "open_and_play"
+    
     if "search" in user_question or "google" in user_question or "find" in user_question:
         return "search_web"
     elif "play" in user_question :
@@ -89,7 +93,20 @@ def perform_action(intent,user_question):
     if intent=="search_web":
         refined_query=refine_query(intent,user_question)
         speak("Searching on google!")
-        search_google(refined_query)
+        result_text=search_google(refined_query)
+
+        result_embedding=model.encode([result_text])
+        similarities=cosine_similarity(result_embedding,line_embeddings)[0]
+        best_score=max(similarities)
+        best_index=similarities.argmax()
+
+        if best_score>=0.55:
+            matched_line=lines[best_index]
+            print(f"Match foind in dataset: '{matched_line}' with score {best_score:.2f}")
+        else:
+            print("No similar entry found in dataset")
+
+        speak(result_text)
 
     elif intent=="play_media":
         
@@ -133,6 +150,27 @@ def perform_action(intent,user_question):
             open_app(app,text)
         else:
             speak("I couldn't identify which app to open")
+
+    elif intent=="open_and_play":
+        app=None
+        track_name=None
+
+        if "open" in user_question and "play" in user_question:
+            try:
+                after_open=user_question.split("open",1)[1]
+                if "and play" in after_open:
+                    app_part,track_part=after_open.split("and play",1)
+                    app=app_part.strip()
+                    track_name=track_part.strip()
+            except Exception as e:
+                print(f"Failed to parse open_and_play intent: {e}")
+        if app=="spotify":
+            speak(f"opening {app} and playing {track_name}")
+            open_app(app)
+            time.sleep(5)
+            play_in_spotify(track_name)
+        else:
+            speak("Sorry, i can only handle spotify for now")
     
     elif intent=="resolve_play":
       
