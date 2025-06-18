@@ -8,6 +8,7 @@ import pyautogui
 from path import find_exe_path
 import subprocess
 import pygetwindow as gw
+from bs4 import BeautifulSoup
 
 
 def get_driver():
@@ -23,8 +24,20 @@ def search_google(query):
     search_box=driver.find_element(By.NAME,"q")
     search_box.send_keys(query)
     search_box.send_keys(Keys.RETURN)
-    time.sleep(20)
+    time.sleep(100)
+
+    page_source=driver.page_source
+    soup=BeautifulSoup(page_source,"html.parser")
+
+    snippet=""
+    try:
+        snippet_element=soup.find("div",class_="BNeawe iBp4i AP7Wnd") or soup.find("div",class_="BNeawe s3v9rd AP7Wnd")
+        if snippet_element:
+            snippet=snippet_element.get_text()
+    except Exception as e:
+        print(f"Failed to extract snippet: {e}")
     driver.quit()
+    return snippet or "Couldn't find a summary"
 
 def play_youtube(query):
     driver=get_driver()
@@ -97,4 +110,3 @@ def play_in_spotify(track_name):
                 print(f"couldn't activate spotify window: {e}")
     else:
         print("Spotify not found")
-
