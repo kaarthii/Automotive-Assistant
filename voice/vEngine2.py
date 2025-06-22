@@ -20,27 +20,6 @@ lines=df["commands"].astype(str).tolist()
 model = SentenceTransformer('all-MiniLM-L6-v2')
 line_embeddings = model.encode(lines)
 
-def aya_response(prompt):
-    try:
-        response = ollama.chat(model="aya:8b", messages=[{"role": "user", "content": prompt}])
-        return response.get("message", {}).get("content", "Error: No response generated.")
-    except Exception as e:
-        print(f"Error fetching response from Aya: {e}")
-        return "Error: AI response failed."
-
-def get_answer(user_question):
-    prompt = f"""
-You are a multilingual assistant. Your job is to:
-1. Translate the user's question to English if it's in another language.
-2. Then answer it in English.
-
-User's question: "{user_question}"
-
-Respond only with the translated question and your final answer.
-"""
-    answer = aya_response(prompt)
-    print(f"Generated Answer: {answer}")
-    return answer
 
 def is_similar(user_input,threshold=0.55):
     user_embedding = model.encode([user_input])
@@ -60,7 +39,6 @@ def detect_intent(user_question):
         return "resolve_play"
     if "open" in user_question and "play" in user_question:
         return "open_and_play"
-    
     if "search" in user_question or "google" in user_question or "find" in user_question:
         return "search_web"
     elif "play" in user_question :
@@ -72,7 +50,7 @@ def detect_intent(user_question):
     elif "exit" in user_question or "quit" in user_question:
         return "exit"
     else:
-        return "general_question"
+        return "search_web"
 
     
 
@@ -90,44 +68,37 @@ def refine_query(intent,user_question):
     
 def perform_action(intent,user_question):
     global pending_query, pending_action
+    spoken_output=""
+
     if intent=="search_web":
         refined_query=refine_query(intent,user_question)
-        speak("Searching on google!")
+        spoken_output="Searching on google!"
+        speak(spoken_output)
         result_text=search_google(refined_query)
-
-        result_embedding=model.encode([result_text])
-        similarities=cosine_similarity(result_embedding,line_embeddings)[0]
-        best_score=max(similarities)
-        best_index=similarities.argmax()
-
-        if best_score>=0.55:
-            matched_line=lines[best_index]
-            print(f"Match foind in dataset: '{matched_line}' with score {best_score:.2f}")
-        else:
-            print("No similar entry found in dataset")
-
         speak(result_text)
 
     elif intent=="play_media":
-        
         refined_query=refine_query(intent,user_question)
         if "on youtube" in user_question or "youtube" in user_question:
-            speak("playing on youtube")
+            spoken_output=f"Playing {refined_query} on YouTube"
+            speak(spoken_output)
             play_youtube(refined_query.replace("on youtube","").strip())
         elif "on spotify" in user_question or "spotify" in user_question:
-            speak("playing on spotify")
+            spoken_output=f"Playing {refined_query} on Spotify"
+            speak(spoken_output)
             play_in_spotify(refined_query.replace("on spotify","").strip())
         else:
             pending_query=refined_query
             pending_action="play"
-            speak("would you like me to play on spotify or youtube?")
+            spoken_output="would you like me to play on spotify or youtube?"
+            speak(spoken_output)
 
 
     elif intent=="open_website":
         refined_query=refine_query(intent,user_question)
-        speak("Openning!")
+        spoken_output=f"Opening {refined_query}"
+        speak(spoken_output)
         open_website(refined_query)
-        return False
 
     elif intent=="open_app":
         words=user_question.lower().split()
@@ -146,49 +117,69 @@ def perform_action(intent,user_question):
             text=user_question.lower().split("type",1)[-1].strip()
 
         if app:
-            speak(f"Opening {app}")
+            spoken_output=f"Opening {app}"
+            speak(spoken_output)
             open_app(app,text)
         else:
-            speak("I couldn't identify which app to open")
+            spoken_output="I couldn't identify which app to open"
+            speak(spoken_output)
 
     elif intent=="open_and_play":
         app=None
         track_name=None
-
-        if "open" in user_question and "play" in user_question:
-            try:
-                after_open=user_question.split("open",1)[1]
-                if "and play" in after_open:
-                    app_part,track_part=after_open.split("and play",1)
-                    app=app_part.strip()
-                    track_name=track_part.strip()
-            except Exception as e:
-                print(f"Failed to parse open_and_play intent: {e}")
+        try:
+            after_open=user_question.split("open",1)[1]
+            if "and play" in after_open:
+                app_part,track_part=after_open.split("and play",1)
+                app=app_part.strip()
+                track_name=track_part.strip()
+        except Exception as e:
+            print(f"Failed to parse open_and_play intent: {e}")
         if app=="spotify":
-            speak(f"opening {app} and playing {track_name}")
+            spoken_output=f"opening {app} and playing {track_name}"
+            speak(spoken_output)
             open_app(app)
             time.sleep(5)
             play_in_spotify(track_name)
         else:
-            speak("Sorry, i can only handle spotify for now")
+            spoken_output="Sorry, i can only handle spotify for now"
+            speak(spoken_output)
     
     elif intent=="resolve_play":
-      
         if "spotify" in user_question:
-            speak("playing on spotify")
+            spoken_output=f"playing {pending_query} on spotify"
+            speak(spoken_output)
             play_in_spotify(pending_query)
         elif "youtube" in user_question:
+            spoken_output=f"playing {pending_query} on youtube"
+            speak(spoken_output)
             play_youtube(pending_query)
         pending_query=None
         pending_action=None
 
     elif intent=="general_question":
-        speak("Hmm..Thinking...")
-        answer=get_answer(user_question)
-        speak(f"{answer}")
+        spoken_output="Hmm..Thinking..."
+        speak(spoken_output)
+        result_text = search_google(user_question)
+        spoken_output=result_text
+        speak(spoken_output)
+
     elif intent=="exit":
-        speak("Goodbye!")
+        spoken_output="Goodbye!"
+        speak(spoken_output)
         return False
+    
+    if spoken_output:
+        final_embedding=model.encode([spoken_output.lower()])
+        similarities=cosine_similarity(final_embedding,line_embeddings)[0]
+        best_score=max(similarities)
+        best_index=similarities.argmax()
+
+        if best_score>=0.55:
+            matched_line=lines[best_index]
+            print(f"Matched : '{matched_line}' (score: {best_score:.2f})")
+        else:
+            print(f"No match found (score: {best_score:.2f})")
     return True
 
  
@@ -201,11 +192,10 @@ def text():
     if not user_question.strip():
         return jsonify({"error": "Empty input"}), 400
 
-    answer= get_answer(user_question)
-    if not answer:
-        return jsonify({"error": "Failed to generate an answer"}), 500
+    result_text = search_google(user_question)
+    speak(result_text)
 
-    response_data = {"User_question": user_question, "answer": answer}
+    response_data = {"User_question": user_question, "answer": result_text}
     return jsonify(response_data)
 
 @app.route('/start-recording')
@@ -228,15 +218,6 @@ def stop_recording():
 
         user_question = user_question.strip().lower() 
         print(f"Recognized: {user_question}")
-
-        is_match,best_score,matched_question=is_similar(user_question,0.55)
-        if is_match:
-            print(f"Similar score: {best_score:.2f}")
-            print(f"Matched Line: {matched_question}")
-        else:
-            print(f"Similar score: {best_score:.2f}")
-            print("Lines do not match")
-
 
         intent=detect_intent(user_question)
         result=perform_action(intent,user_question)
