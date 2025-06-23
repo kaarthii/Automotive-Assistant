@@ -193,5 +193,21 @@ def play_in_spotify(track_name):
     except Exception as e:
         print(f"Spotify Error: {e}")
         return "Failed to play track on Spotify."
+
+''' 
+def play_in_spotify_app(track_name):
+    open_app("spotify")  
+
+    time.sleep(3)  
+    pyautogui.hotkey('ctrl', 'l')  
+    pyautogui.write(track_name)
+    pyautogui.press('enter')
+
+    time.sleep(2) 
+    pyautogui.press('tab')  
+    pyautogui.press('enter')  
+
+    print(f"Attempting to play '{track_name}' in Spotify app")
+'''
     
   
