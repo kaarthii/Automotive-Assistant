@@ -207,7 +207,7 @@ def play_in_spotify_app(track_name):
     pyautogui.press('tab')  
     pyautogui.press('enter')  
 
-    print(f"Attempting to play '{track_name}' in Spotify app")
+    print(f"Playing '{track_name}' in Spotify app")
 '''
     
   
