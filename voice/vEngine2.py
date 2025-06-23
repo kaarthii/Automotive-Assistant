@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify,render_template
 import os
 import ollama
-from speechToText import recognize_speech,record_audio
+from speechToText import recognize_speech,record_audio,transcribe_audio
 from textToSpeech import speak
 import pandas as pd
 from sentence_transformers import SentenceTransformer
@@ -21,15 +21,6 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 line_embeddings = model.encode(lines)
 
 
-def is_similar(user_input,threshold=0.55):
-    user_embedding = model.encode([user_input])
-    similarities= cosine_similarity(user_embedding,line_embeddings)[0]
-    best_score=max(similarities)
-    best_index=similarities.argmax()
-    
-    is_match= best_score>=threshold
-    matched_question = lines[best_index] if is_match else None
-    return is_match,best_score,matched_question
 
 
 def detect_intent(user_question):
@@ -170,7 +161,9 @@ def perform_action(intent,user_question):
         return False
     
     if spoken_output:
-        final_embedding=model.encode([spoken_output.lower()])
+        audio_path=speak(spoken_output)
+        transcribed_text=transcribe_audio(audio_path)
+        final_embedding=model.encode([transcribed_text.lower()])
         similarities=cosine_similarity(final_embedding,line_embeddings)[0]
         best_score=max(similarities)
         best_index=similarities.argmax()
