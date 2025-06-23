@@ -21,8 +21,6 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 line_embeddings = model.encode(lines)
 
 
-
-
 def detect_intent(user_question):
     user_question=user_question.lower()
 
@@ -43,7 +41,6 @@ def detect_intent(user_question):
     else:
         return "search_web"
 
-    
 
 def refine_query(intent,user_question):
     user_question=user_question.lower()
@@ -60,35 +57,37 @@ def refine_query(intent,user_question):
 def perform_action(intent,user_question):
     global pending_query, pending_action
     spoken_output=""
+    audio_path=""
 
     if intent=="search_web":
         refined_query=refine_query(intent,user_question)
         spoken_output="Searching on google!"
-        speak(spoken_output)
+        audio_path=speak(spoken_output)
         result_text=search_google(refined_query)
-        speak(result_text)
+        audio_path=speak(result_text)
 
     elif intent=="play_media":
         refined_query=refine_query(intent,user_question)
         if "on youtube" in user_question or "youtube" in user_question:
             spoken_output=f"Playing {refined_query} on YouTube"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
             play_youtube(refined_query.replace("on youtube","").strip())
         elif "on spotify" in user_question or "spotify" in user_question:
             spoken_output=f"Playing {refined_query} on Spotify"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
             play_in_spotify(refined_query.replace("on spotify","").strip())
         else:
             pending_query=refined_query
             pending_action="play"
             spoken_output="would you like me to play on spotify or youtube?"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
+            
 
 
     elif intent=="open_website":
         refined_query=refine_query(intent,user_question)
         spoken_output=f"Opening {refined_query}"
-        speak(spoken_output)
+        audio_path=speak(spoken_output)
         open_website(refined_query)
 
     elif intent=="open_app":
@@ -109,11 +108,11 @@ def perform_action(intent,user_question):
 
         if app:
             spoken_output=f"Opening {app}"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
             open_app(app,text)
         else:
             spoken_output="I couldn't identify which app to open"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
 
     elif intent=="open_and_play":
         app=None
@@ -128,40 +127,39 @@ def perform_action(intent,user_question):
             print(f"Failed to parse open_and_play intent: {e}")
         if app=="spotify":
             spoken_output=f"opening {app} and playing {track_name}"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
             open_app(app)
             time.sleep(5)
             play_in_spotify(track_name)
         else:
             spoken_output="Sorry, i can only handle spotify for now"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
     
     elif intent=="resolve_play":
         if "spotify" in user_question:
             spoken_output=f"playing {pending_query} on spotify"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
             play_in_spotify(pending_query)
         elif "youtube" in user_question:
             spoken_output=f"playing {pending_query} on youtube"
-            speak(spoken_output)
+            audio_path=speak(spoken_output)
             play_youtube(pending_query)
         pending_query=None
         pending_action=None
 
     elif intent=="general_question":
         spoken_output="Hmm..Thinking..."
-        speak(spoken_output)
+        audio_path=speak(spoken_output)
         result_text = search_google(user_question)
         spoken_output=result_text
-        speak(spoken_output)
+        audio_path=speak(spoken_output)
 
     elif intent=="exit":
         spoken_output="Goodbye!"
-        speak(spoken_output)
+        audio_path=speak(spoken_output)
         return False
     
     if spoken_output:
-        audio_path=speak(spoken_output)
         transcribed_text=transcribe_audio(audio_path)
         final_embedding=model.encode([transcribed_text.lower()])
         similarities=cosine_similarity(final_embedding,line_embeddings)[0]
@@ -185,8 +183,8 @@ def text():
     if not user_question.strip():
         return jsonify({"error": "Empty input"}), 400
 
-    result_text = search_google(user_question)
-    speak(result_text)
+    intent = detect_intent(user_question)
+    result_text=perform_action(intent,user_question)
 
     response_data = {"User_question": user_question, "answer": result_text}
     return jsonify(response_data)
