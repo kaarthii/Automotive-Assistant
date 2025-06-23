@@ -17,7 +17,6 @@ def get_driver():
     service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
 
-    options.add_argument(r"C:\\Users\\Dell\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 14")  # or another clean folder path
     options.add_argument("--start-maximized")
     options.add_experimental_option("detach", True)
 
@@ -62,11 +61,11 @@ def search_google(query):
             soup = BeautifulSoup(page_source, "html.parser")
 
             selectors = [
-                "div.BNeawe.iBp4i.AP7Wnd",            
-                "div.BNeawe.tAd8D.AP7Wnd",            
-                "div.BNeawe.s3v9rd.AP7Wnd",           
-                "div.kCrYT > a",                      
-                "div.ZINbbc.xpd.O9g5cc.uUPGi"         
+                "div.BNeawe.iBp4i.AP7Wnd",    #captures short, direct answers        
+                "div.BNeawe.tAd8D.AP7Wnd",    #captures summaries of long text
+                "div.BNeawe.s3v9rd.AP7Wnd",   #captures descriptive text 
+                "div.kCrYT > a",              #captures anchor tags inside div containers        
+                "div.ZINbbc.xpd.O9g5cc.uUPGi" #captures full result block
             ]
 
             for sel in selectors:
