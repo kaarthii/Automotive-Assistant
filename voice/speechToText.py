@@ -1,6 +1,4 @@
 import sounddevice as sd
-import vosk 
-import json
 import numpy as np
 import whisper
 import wave
@@ -21,7 +19,7 @@ def record_audio():
     audio_data=sd.rec(int(duration*samplerate),samplerate=samplerate,channels=1,dtype='int16')
     sd.wait()
 
-    with wave.open("temp_audio.wav","wb") as wf:
+    with wave.open(filename,"wb") as wf:
         wf.setnchannels(1)
         wf.setsampwidth(2)
         wf.setframerate(samplerate)
@@ -47,3 +45,10 @@ def recognize_speech():
         return "" 
     print(f"Final Transcription: {text}")
     return text
+
+def transcribe_audio(file_path):
+    print(f"Transcribe file: {file_path}")
+    result=whisper_model.transcribe(file_path)
+    transcribed=result.get("text","").strip()
+    print(f"Transcribed audio: {transcribed}")
+    return transcribed
