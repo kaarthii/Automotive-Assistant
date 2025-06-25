@@ -89,10 +89,10 @@ Supported Intents
 | Intent         | Example Command                            |
 |----------------|---------------------------------------------|
 | Search         | "Search weather in Bangalore"              |
-| Play Media     | "Play Coldplay on Spotify"                 |
+| Play Media     | "Play Hukum on Spotify"                 |
 | Open Website   | "Open wikipedia.com"                       |
 | Open App       | "Open notepad and type hello world"        |
-| Combined       | "Open Spotify and play Travis Scott"       |
+| Combined       | "Open Spotify and play Anirudh"       |
 
 ---
 
