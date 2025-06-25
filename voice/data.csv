@@ -1,0 +1,502 @@
+commands
+Play music
+Pause the song
+Next song
+Play previous track
+Play rock music
+Play my favorites
+Increase volume
+Play music by Arijit Singh
+Shuffle songs
+Mute music
+Unmute music
+Play Bollywood songs
+Resume playback
+Play English songs
+Lower the volume
+Play the top charts
+Play latest songs
+Loop this song
+Stop the music
+Play music from my playlist
+Play romantic songs
+Play workout music
+Turn off music after 30 minutes
+Play music on Spotify
+Play devotional songs
+Play music via Bluetooth
+Play relaxing music
+Increase bass
+Turn on equalizer
+Play next album
+Play last playlist
+Play music loudly
+Play the current favorite
+Resume my last played track
+Play party songs
+Play music while driving
+Play retro hits
+Play instrumental music
+Play acoustic songs
+Play top hits of the week
+Play jazz music
+Start background music
+Turn off shuffle
+Play Lofi music
+Play music from YouTube
+Play EDM tracks
+Play music from USB
+Play Hindi classics
+Queue this song
+Crossfade to the next track
+Navigate to work
+Take me home
+Show nearby restaurants
+Navigate to nearest petrol pump
+Start route to Bangalore
+Call Dad
+Call emergency services
+Call home
+Send a message to John
+Send a message to Mom
+Redial last dialed number
+Call voicemail
+Hang up the call
+Put call on speaker
+Mute the call
+Unmute the call
+Check missed calls
+Check recent calls
+Call the office
+Voice dial contact
+Block a number
+Call last received number
+Make a conference call
+Check call duration
+Send a text message
+Call a taxi
+Call via WhatsApp
+Call using Bluetooth
+Call the garage
+Add a contact
+Delete a contact
+Search contacts
+Navigate to the airport
+Find a route to the mall
+Show parking near me
+Take me to the hotel
+Find nearest hospital
+Navigate to the gas station
+Find a faster route
+Show traffic updates
+Avoid toll roads
+Set destination to Chennai
+Save home location
+Save work location
+Where am I?
+Show current location
+Show map
+Open Google Maps
+Change route
+Navigate using voice
+Stop navigation
+Recalculate route
+Show directions
+Navigate to favorite place
+Zoom in the map
+Zoom out the map
+Turn off navigation
+Enable night mode on map
+Add waypoint
+Resume route
+Repeat last instruction
+Get ETA to destination
+Avoid highways
+Switch to satellite view
+Switch to 2D view
+Switch to 3D view
+Set a detour
+Update map
+Find coffee shops nearby
+Turn on AC
+Set temperature to 22
+Open the sunroof
+Turn off headlights
+Switch on fog lights
+Turn off AC
+Close the sunroof
+Turn on headlights
+Increase fan speed
+Decrease fan speed
+Set temperature to 18
+Turn on rear defogger
+Open car windows
+Close car windows
+Turn on wipers
+Turn off wipers
+Turn on hazard lights
+Turn off hazard lights
+Turn on seat warmer
+Turn off seat warmer
+Turn on defrost
+Turn off defrost
+Turn on auto climate
+Lock the doors
+Unlock the doors
+Open the trunk
+Close the trunk
+Enable sport mode
+Enable eco mode
+Enable cruise control
+Disable cruise control
+Enable parking assist
+Disable parking assist
+Start engine
+Stop engine
+Check tire pressure
+Check fuel level
+Show battery status
+Turn on traction control
+Turn off traction control
+Enable lane assist
+Disable lane assist
+Connect to WiFi
+Disconnect from WiFi
+Enable Bluetooth
+Disable Bluetooth
+Pair a new device
+Unpair a device
+Enable hotspot
+Disable hotspot
+Check network signal
+Show connected devices
+Set hotspot password
+Change Bluetooth name
+Sync contacts
+Connect to carplay
+Disconnect carplay
+Remind me to fill fuel
+Set reminder for service
+Remind me to take medicine
+What are my reminders?
+Cancel all reminders
+Set an alarm
+Snooze the alarm
+Cancel the alarm
+What's the weather?
+What's the temperature?
+Read my messages
+Read missed calls
+Check my schedule
+Play the news
+Open YouTube
+Open Netflix
+Play Amazon Prime Video
+Tell me a joke
+What's the time now?
+What's today's date?
+How's the traffic?
+Turn off screen
+Turn on dark mode
+Increase screen brightness
+Decrease screen brightness
+Mute all sounds
+Unmute all sounds
+Connect to Bluetooth
+Disconnect hotspot
+Enable WiFi
+What's the WiFi password
+Enable mobile data
+Disable mobile data
+Check data usage
+Share internet
+Connect to Android Auto
+Disconnect Android Auto
+Enable auto-sync
+Disable auto-sync
+Check WiFi signal strength
+Check Bluetooth connection
+Turn on airplane mode
+Turn off airplane mode
+Enable DND mode
+Disable DND mode
+Read unread messages
+Mark all messages as read
+Show battery percentage
+Turn off notifications
+Enable auto brightness
+Disable auto brightness
+Change language to Hindi
+Change language to English
+Reset system settings
+Update software
+Show storage details
+Clear cache
+Delete browsing history
+Enable voice commands
+Disable voice commands
+Restart system
+Shutdown system
+Enable gesture control
+Disable gesture control
+Enable face unlock
+Disable face unlock
+Check app updates
+Open settings
+Enable driving mode
+Disable driving mode
+Start screen recording
+Stop screen recording
+Take a screenshot
+Open user manual
+Switch user profile
+Add reminder to buy groceries
+What's my next meeting
+Set alarm for 7 AM
+Add meeting to calendar
+Cancel meeting at 5 PM
+Remind me to charge the car
+Set reminder for tomorrow 8 AM
+Schedule service appointment
+Remind me every Monday
+Remind me in 30 minutes
+Show all alarms
+Set alarm for weekdays
+Set recurring alarm
+Turn off all alarms
+Delete alarm for 6 AM
+Snooze alarm for 10 minutes
+Change alarm tone
+What's my next alarm?
+Remind me to check engine
+Add birthday to calendar
+Remind me to pick up laundry
+Set medication reminder
+Show calendar events
+Cancel all reminders
+Remind me to call John at 6
+Add event to calendar
+Postpone reminder
+Remind me to pay toll
+Schedule a doctor appointment
+Remind me to clean dashboard
+Read new messages
+What's the weather
+Do I have missed calls
+What’s the news today?
+Read all notifications
+Clear all notifications
+Read last message
+Who called me last?
+How many unread messages?
+Open WhatsApp messages
+Show email notifications
+Clear message history
+Mute notifications
+Unmute notifications
+What notifications do I have?
+What’s my battery level?
+Show recent alerts
+Play voice message
+Reply to the last message
+Mark message as unread
+Mark message as important
+Delete all notifications
+Enable heads-up notifications
+Disable heads-up notifications
+Show calendar alerts
+Notify me when battery is low
+Enable weather alerts
+Disable weather alerts
+Announce caller name
+Announce message content
+Mute group chats
+Unmute group chats
+Show missed notifications
+Flash for new messages
+Set notification tone
+Disable notification tone
+Turn on message preview
+Turn off message preview
+Enable lock screen notifications
+Disable lock screen notifications
+Play YouTube video
+Open Spotify
+Start Netflix
+Open Amazon Prime
+Play latest trailer
+Play podcast
+Resume last video
+Pause the video
+Stop video playback
+Fast forward video
+Rewind video
+Open YouTube Music
+Play trending videos
+Play comedy show
+Open music library
+Play live radio
+What’s trending now?
+Open music app
+Search for videos
+Play motivational video
+Open voice assistant
+What’s my name?
+Who created you?
+What can you do?
+Tell me something interesting
+Translate hello to Spanish
+Open help center
+Enable safety mode
+Disable safety mode
+Activate emergency response
+What’s the time
+Who is the Prime Minister of India
+Tell me a joke
+What’s the time?
+What day is today?
+What’s today’s date?
+What year is it?
+What’s the weather like?
+Is it going to rain today?
+What’s the temperature outside?
+Will it be hot tomorrow?
+How is the weather this weekend?
+What’s the humidity level?
+Who is the Prime Minister of India?
+Who is the President of the USA?
+What is the capital of France?
+How far is the moon?
+How old is the Earth?
+What’s the tallest mountain?
+Who invented the car?
+When is the next holiday?
+What is AI?
+How does Bluetooth work?
+What is 25 times 12?
+What’s the definition of photosynthesis?
+Convert 100 dollars to rupees
+Translate good morning to French
+How do you say thank you in German?
+Define machine learning
+What’s the population of India?
+Who won the last cricket match?
+How many days until New Year?
+Tell me a joke
+Say something funny
+Make me laugh
+Tell me a fun fact
+Who made you?
+What can you do?
+Introduce yourself
+Are you a robot?
+What is your name?
+Do you sleep?
+Do you have feelings?
+What languages can you speak?
+What do you like?
+Can you sing a song?
+Can you dance?
+Tell me a story
+Surprise me
+Sing happy birthday
+Reduce screen brightness
+Switch to dark mode
+Turn on airplane mode
+Reduce screen brightness
+Increase screen brightness
+Switch to dark mode
+Switch to light mode
+Turn on airplane mode
+Turn off airplane mode
+Enable Bluetooth
+Disable Bluetooth
+Enable WiFi
+Disable WiFi
+Turn on mobile data
+Turn off mobile data
+Enable hotspot
+Disable hotspot
+Change wallpaper
+Set wallpaper to default
+Enable do not disturb
+Disable do not disturb
+Enable auto-rotate
+Disable auto-rotate
+Turn on flashlight
+Turn off flashlight
+Enable power saving mode
+Disable power saving mode
+Restart device
+Shutdown device
+Clear cache
+Reset network settings
+Enable voice commands
+Disable voice commands
+Enable gesture control
+Disable gesture control
+Turn on screen timeout
+Turn off screen timeout
+Lock screen
+Unlock screen
+Enable face unlock
+Disable face unlock
+Enable fingerprint unlock
+Disable fingerprint unlock
+Enable app notifications
+Disable app notifications
+Clear all notifications
+Enable system updates
+Disable system updates
+Check for updates
+Download updates
+Install updates
+Open settings
+Close settings
+Turn on rearview camera  
+Turn off rearview camera  
+Activate parking sensors  
+Deactivate parking sensors  
+Open glove compartment  
+Close glove compartment  
+Activate night vision mode  
+Deactivate night vision mode  
+Turn on ambient lighting  
+Turn off ambient lighting  
+Set ambient lighting color to blue  
+Set ambient lighting color to red  
+Enable child lock  
+Disable child lock  
+Start defogging windows  
+Stop defogging windows  
+Enable voice dialing  
+Disable voice dialing  
+Show fuel efficiency  
+Reset trip meter  
+Show average speed  
+Enable speed limiter  
+Disable speed limiter  
+Activate automatic parking  
+Deactivate automatic parking  
+Turn on seat massage  
+Turn off seat massage  
+Start engine remotely  
+Stop engine remotely  
+Check oil level  
+Schedule tire rotation  
+Activate rear cross traffic alert  
+Deactivate rear cross traffic alert  
+Show blind spot warning  
+Reset maintenance light  
+Turn on eco coaching  
+Turn off eco coaching  
+Enable adaptive cruise control  
+Disable adaptive cruise control  
+Activate traffic sign recognition  
+Deactivate traffic sign recognition  
+Show tire pressure warning  
+Turn on rain sensing wipers  
+Turn off rain sensing wipers  
+Set wiper speed to medium  
+Enable hill descent control  
+Disable hill descent control  

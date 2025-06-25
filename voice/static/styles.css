@@ -1,0 +1,55 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.voice-assistant-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  width: 800px;
+  text-align: center;
+  margin:0 auto;
+}
+
+.assistant-output {
+  min-height: 60px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.assistant-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.assistant-controls input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.assistant-controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.assistant-controls button:hover {
+  background-color: #0056b3;
+}
+
