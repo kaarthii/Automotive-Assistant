@@ -92,7 +92,7 @@ Supported Intents
 | Play Media     | "Play Coldplay on Spotify"                 |
 | Open Website   | "Open wikipedia.com"                       |
 | Open App       | "Open notepad and type hello world"        |
-| Combined       | "Open Spotify and play Taylor Swift"       |
+| Combined       | "Open Spotify and play Travis Scott"       |
 
 ---
 
