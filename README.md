@@ -4,7 +4,7 @@ An intelligent voice-driven assistant designed for interactive infotainment or d
 
 ---
 
-Features
+## Features
 
 - Voice & Text Input
 - Intent Recognition using NLP
@@ -16,7 +16,7 @@ Features
 
 ---
 
-Architecture Overview
+## Architecture Overview
 
 ```
 UI (HTML+JS)
