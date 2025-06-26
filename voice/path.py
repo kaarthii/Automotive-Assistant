@@ -14,7 +14,7 @@ def find_exe_path(app_keyword):
             r"C:\\Program Files (x86)",
             os.environ.get("LOCALAPPDATA","")   # Include user's local app data path
         ]
-        # Recursively walk through each directory looking for a matching .ex
+        # Recursively walk through each directory looking for a matching .exe
         for base in search_dirs:
             for root, dirs, files in os.walk(base):
                 for file in files:
