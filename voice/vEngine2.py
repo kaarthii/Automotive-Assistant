@@ -200,6 +200,13 @@ def perform_action(intent,user_question):
                 "text":"No match found",
                 "matched":False
             }
+            # Append the unmatched transcribed text to data.csv
+            try:
+                with open("data.csv", "a", encoding="utf-8") as f:
+                    f.write(f"\n{transcribed_text}")
+                print("Unmatched command added to data.csv")
+            except Exception as e:
+                print(f"Failed to append to data.csv: {e}")
     return {
         "response": transcribed_text or spoken_output,
         "match_info":match_display
