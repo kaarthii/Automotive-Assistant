@@ -1,7 +1,8 @@
 import sounddevice as sd # To record audio from the microphone
 import numpy as np  # For array operations on audio data
 import whisper     # OpenAI's Whisper model for speech transcription
-import wave   # To save audio in .wav format
+import wave    # To save audio in .wav format
+import time  
 
 # Load the large Whisper model once globally for use across functions
 whisper_model=whisper.load_model("large")
@@ -31,7 +32,6 @@ def recognize_speech():
     wait_time=0
     # Wait loop until recording is flagged as finished
     while not recording_finished:
-        import time
         time.sleep(0.1)
         wait_time+=1
         if wait_time>200:   # Timeout after ~20 seconds
