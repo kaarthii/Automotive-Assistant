@@ -1,0 +1,61 @@
+/* GLOBAL BODY STYLING*/
+body {
+  font-family: 'Segoe UI', sans-serif;      /* Clean, modern typeface */
+  background: #f3f4f6;                      /* Light gray background */
+  margin: 0;                                /* Removes default spacing */
+  padding: 2rem;                            /* Adds some breathing room */
+  display: flex;                            /* Enables flex layout */
+  justify-content: center;                 /* Center horizontally */
+  align-items: center;                     /* Center vertically */
+  min-height: 100vh;                        /* Full height of viewport */
+}
+
+/*CONTAINER FOR ASSISTANT UI */
+.voice-assistant-container {
+  background: white;                        /* White card background */
+  padding: 2rem;                            /* Spacing inside container */
+  border-radius: 1rem;                      /* Smooth rounded corners */
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);     /* Subtle drop shadow */
+  width: 800px;                             /* Fixed width for readability */
+  text-align: center;                       /* Center-align text and elements */
+  margin: 0 auto;                           /* Center the container horizontally */
+}
+
+/*DISPLAY AREA FOR ASSISTANT RESPONSE */
+.assistant-output {
+  min-height: 60px;                         /* Reserve space even before text appears */
+  margin-bottom: 1rem;                      /* Space below for controls */
+  font-size: 1rem;                          /* Standard readable font size */
+  color: #333;                              /* Dark gray text color */
+}
+
+/*CONTROL PANEL (buttons + input)*/
+.assistant-controls {
+  display: flex;                            /* Arrange controls in a row */
+  gap: 0.5rem;                              /* Space between controls */
+  justify-content: center;                 /* Center the control group */
+  align-items: center;                     /* Vertically align controls */
+}
+
+/*TEXT INPUT FIELD STYLING*/
+.assistant-controls input {
+  flex: 1;                                  /* Take up all available space */
+  padding: 0.5rem;                          /* Padding inside input */
+  border: 1px solid #ccc;                   /* Light gray border */
+  border-radius: 0.5rem;                    /* Slightly rounded corners */
+}
+
+/* BUTTON STYLE (mic, stop, send)*/
+.assistant-controls button {
+  background-color: #007bff;               /* Bootstrap primary blue */
+  color: white;                            /* White icon/text */
+  border: none;                            /* No border */
+  padding: 0.5rem 0.75rem;                 /* Comfortable click area */
+  border-radius: 50%;                      /* Circular buttons */
+  cursor: pointer;                         /* Pointer cursor on hover */
+}
+
+/*  BUTTON HOVER STATE */
+.assistant-controls button:hover {
+  background-color: #0056b3;               /* Darker blue on hover */
+}
