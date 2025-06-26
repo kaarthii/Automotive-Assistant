@@ -35,7 +35,7 @@ Flask API (vEngine.py)
 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/automotive-assistant.git
+git clone https://github.com/kaarthii/automotive-assistant.git
 cd automotive-assistant
 ```
 
@@ -69,7 +69,7 @@ Open `http://localhost:5001` in your browser.
 ## Project Structure
 
 ```
-├── vEngine.py            # Flask backend: intent detection + API logic
+├── vEngine2.py            # Flask backend: intent detection + API logic
 ├── intent.py             # Task execution via Selenium + pyautogui
 ├── speechToText.py       # Voice capture + Whisper transcription
 ├── textToSpeech.py       # Text-to-Speech generation using gTTS
