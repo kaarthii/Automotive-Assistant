@@ -1,4 +1,4 @@
-##Automotive Voice Assistant
+## Automotive Voice Assistant
 
 An intelligent voice-driven assistant designed for interactive infotainment or desktop productivity. It responds to voice or text, understands user intent, and executes dynamic tasks like web searches, media playback via Spotify/YouTube, or launching local apps—all backed by modern AI models and automation.
 
