@@ -30,7 +30,7 @@ Flask API (vEngine.py)
 
 ---
 
-Getting Started
+## Getting Started
 
 1. Clone the Repository
 
@@ -66,7 +66,7 @@ Open `http://localhost:5001` in your browser.
 
 ---
 
-Project Structure
+## Project Structure
 
 ```
 ├── vEngine.py            # Flask backend: intent detection + API logic
@@ -84,7 +84,7 @@ Project Structure
 
 ---
 
-Supported Intents
+## Supported Intents
 
 | Intent         | Example Command                            |
 |----------------|---------------------------------------------|
@@ -96,7 +96,7 @@ Supported Intents
 
 ---
 
-Dependencies (Key Packages)
+## Dependencies (Key Packages)
 
 - Flask, pandas, sentence-transformers, sklearn
 - selenium, pyautogui, pygetwindow, beautifulsoup4
@@ -106,7 +106,7 @@ Dependencies (Key Packages)
 
 ---
 
-Command Similarity
+## Command Similarity
 
 The system compares responses to predefined `commands` in `data.csv` using:
 - SentenceTransformer (`all-MiniLM-L6-v2`)
