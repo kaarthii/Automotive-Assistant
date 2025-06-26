@@ -1,0 +1,17 @@
+Flask
+pandas
+sentence-transformers
+scikit-learn
+selenium
+webdriver-manager
+pyautogui
+pygetwindow
+bs4
+sounddevice
+numpy
+whisper
+torch
+wave
+gTTS
+pydub
+pygame
