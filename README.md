@@ -117,9 +117,10 @@ Matched vs. unmatched results are shown via color-coded UI feedback.
 ---
 
 # Contacts
-Karthi D
-+91 6369773744
-karthii.d806@gmail.com
+
+Name: Karthi D
+Ph.No: +91 6369773744
+Mail id: karthii.d806@gmail.com
 
 ---
 
